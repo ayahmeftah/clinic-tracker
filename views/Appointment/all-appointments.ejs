@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>All Appointments</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
     <%- include('../partials/navbar') %>
-    <h1>All Appointments</h1>
-    <% allAppoint.forEach(appoint => { %>
-
-        <h2>Patient Name: <%= appoint.patientName %></h2>
-        <p>Date: <%= new Date(appoint.date).toLocaleDateString() %></p>
-        <p>Reason: <%= appoint.reason %></p>
-        <p>Doctor: <%= appoint.doctor.name %></p>
-        <a href="/appointments/<%= appoint._id %>">View Details</a>
-        <hr>
-    <% }) %>
+    
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>All Appointments</h1>
+            <a href="/appointments/new" class="btn btn-success">Add New Appointment</a>
+        </div>
+        
+        <div class="row">
+            <% allAppoint.forEach(appoint => { %>
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Patient Name: <%= appoint.patientName %></h5>
+                            <p class="card-text">Date: <%= new Date(appoint.date).toLocaleDateString() %></p>
+                            <p class="card-text">Reason: <%= appoint.reason %></p>
+                            <p class="card-text">Doctor: <%= appoint.doctor.name %></p>
+                            <a href="/appointments/<%= appoint._id %>" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    
 </body>
 </html>

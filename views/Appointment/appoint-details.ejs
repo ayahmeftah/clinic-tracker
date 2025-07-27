@@ -1,49 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Appointment Details</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
-
 <body>
-    <h1>Appointment Details</h1>
-    <form action="/appointments/<%= foundAppoint._id %>?_method=delete" method="post">
-        <button>Delete Appointment</button>
-    </form> <br>
-    <form action="/appointments/<%= foundAppoint._id %>/edit" method="get">
-        <button>Edit Appointment</button>
-    </form>
-    <h2>Patient Name: <%= foundAppoint.patientName %>
-    </h2>
-    <p>Appointment Date: <%= new Date(foundAppoint.date).toLocaleDateString() %>
-    </p>
-    <p>Reason: <%= foundAppoint.reason %>
-    </p>
-    <p>Doctor: <%= foundAppoint.doctor.name %>
-    </p>
-
-    <h3>Notes</h3>
-    <form action="/appointments/<%= foundAppoint._id %>/notes" method="post">
-        <input type="text" name="content" id="content">
-        <button>Add Note</button>
-    </form>
-
-    <ul>
-        <% foundAppoint.notes.forEach(note => {%>
-            <li><%= note.content %></li>
-            <p>created at: <%= new Date(note.createdAt).toLocaleDateString() %></p>
-            <form action="/appointments/<%= foundAppoint._id %>/notes/delete" method="post">
-                <input type="hidden" name="noteId" value="<%= note._id %>">
-                <button>Delete Note</button>
+    <%- include('../partials/navbar') %>
+    
+    <div class="container mt-5">
+        <h1 class="mb-4">Appointment Details</h1>
+        
+        <div class="d-flex justify-content-end mb-4">
+            <form action="/appointments/<%= foundAppoint._id %>?_method=delete" method="post" class="me-2">
+                <button type="submit" class="btn btn-danger">Delete Appointment</button>
             </form>
-            <hr>
+            <form action="/appointments/<%= foundAppoint._id %>/edit" method="get">
+                <button type="submit" class="btn btn-warning">Edit Appointment</button>
+            </form>
+        </div>
 
-       <% }) %>
-    </ul>
+        <h2>Patient Name: <%= foundAppoint.patientName %></h2>
+        <p>Appointment Date: <%= new Date(foundAppoint.date).toLocaleDateString() %></p>
+        <p>Reason: <%= foundAppoint.reason %></p>
+        <p>Doctor: <%= foundAppoint.doctor.name %></p>
 
+        <h3>Notes</h3>
+        <form action="/appointments/<%= foundAppoint._id %>/notes" method="post" class="mb-3">
+            <input type="text" name="content" id="content" class="form-control" placeholder="Add a note" required>
+            <button type="submit" class="btn btn-success mt-2">Add Note</button>
+        </form>
 
+        <ul class="list-group">
+            <% foundAppoint.notes.forEach(note => { %>
+                <li class="list-group-item">
+                    <strong><%= note.content %></strong>
+                    <p class="text-muted">Created at: <%= new Date(note.createdAt).toLocaleDateString() %></p>
+                    <form action="/appointments/<%= foundAppoint._id %>/notes/delete" method="post" class="d-inline">
+                        <input type="hidden" name="noteId" value="<%= note._id %>">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete Note</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+    
 </body>
-
 </html>

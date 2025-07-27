@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add New Doctor</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Add new Doctor</h1>
-
-    <form action="/doctors" method="post">
-        <label for="name">Doctor Name:</label>
-        <input type="text" name="name" id="name">
-        <br><br>
-        <label for="specialty">Specialty:</label>
-        <input type="text" name="specialty" id="specialty">
-        <br><br>
-        <label for="yearsOfExperience">Years Of Experience</label>
-        <input type="number" name="yearsOfExperience" id="yearsOfExperience">
-        <br><br>
-        <button type="submit">Create</button>
-    </form>
+    <%- include('../partials/navbar') %>
+    
+    <div class="container mt-5">
+        <h1 class="mb-4">Add New Doctor</h1>
+        <form action="/doctors" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Doctor Name:</label>
+                <input type="text" name="name" id="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="specialty" class="form-label">Specialty:</label>
+                <input type="text" name="specialty" id="specialty" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="yearsOfExperience" class="form-label">Years of Experience:</label>
+                <input type="number" name="yearsOfExperience" id="yearsOfExperience" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Create</button>
+        </form>
+    </div>
+    
 </body>
 </html>

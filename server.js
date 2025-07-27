@@ -14,8 +14,7 @@ app.use(express.urlencoded({ extended: false })); // this will allow us to see t
 app.use(methodOverride("_method")); // Changes the method based on the ?_method
 app.use(morgan("dev")) // logs the requests as they are sent to our sever in the terminal
 
-
-
+app.use('/css', express.static('node_modules/bootstrap/dist/css'));
 
 // connect to database
 conntectToDB()
