@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Appointment</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
+
 <body>
     <%- include('../partials/navbar') %>
-    
-    <div class="container mt-5">
-        <h1 class="mb-4">Edit Appointment</h1>
-        <form action="/appointments/<%= foundAppoint._id %>?_method=put" method="post">
-            <div class="mb-3">
-                <label for="patientName" class="form-label">Patient Name:</label>
-                <input type="text" name="patientName" id="patientName" class="form-control" value="<%= foundAppoint.patientName %>" required>
-            </div>
-            <div class="mb-3">
-                <label for="reason" class="form-label">Reason:</label>
-                <input type="text" name="reason" id="reason" class="form-control" value="<%= foundAppoint.reason %>" required>
-            </div>
-            <div class="mb-3">
-                <label for="date" class="form-label">Date of Appointment:</label>
-                <input type="date" name="date" id="date" class="form-control" value="<%= foundAppoint.date.toISOString().slice(0, 10) %>" required>
-            </div>
-            <div class="mb-3">
-                <label for="doctor" class="form-label">Doctor:</label>
-                <select name="doctor" id="doctor" class="form-select" required>
-                    <% allDoctors.forEach(doctor => { %>
-                        <option value="<%= doctor._id %>" <%= foundAppoint.doctor._id == doctor._id ? 'selected' : '' %>><%= doctor.name %></option>
-                    <% }) %>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-success">Save Changes</button>
-        </form>
-    </div>
+
+        <div class="container mt-5">
+            <h1 class="mb-4">Edit Appointment</h1>
+            <form action="/appointments/<%= foundAppoint._id %>?_method=put" method="post">
+                <div class="mb-3">
+                    <label for="patientName" class="form-label">Patient Name:</label>
+                    <input type="text" name="patientName" id="patientName" class="form-control"
+                        value="<%= foundAppoint.patientName %>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reason" class="form-label">Reason:</label>
+                    <input type="text" name="reason" id="reason" class="form-control" value="<%= foundAppoint.reason %>"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date of Appointment:</label>
+                    <input type="date" name="date" id="date" class="form-control"
+                        value="<%= foundAppoint.date.toISOString().slice(0, 10) %>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="doctor" class="form-label">Doctor:</label>
+                    <select name="doctor" id="doctor" class="form-select" required>
+                        <% allDoctors.forEach(doctor=> { %>
+                            <option value="<%= doctor._id %>" <%=foundAppoint.doctor._id.toString()===doctor._id.toString() ? 'selected' : '' %>>
+                                <%= doctor.name %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Save Changes</button>
+            </form>
+        </div>
 </body>
+
 </html>

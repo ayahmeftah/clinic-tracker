@@ -61,7 +61,18 @@ router.get('/:id/edit', async (req, res) => {
 // update appointment
 router.put('/:id', async (req, res) => {
     try {
-        const foundAppoint = await Appoint.findByIdAndUpdate(req.params.id, req.body)
+        const foundAppoint = await Appoint.findByIdAndUpdate(req.params.id, req.body).populate("doctor")
+        const oldDoctorId = foundAppoint.doctor._id
+        const newDoctorId = req.body.doctor
+
+        if (oldDoctorId.toString() !== newDoctorId) {
+            const oldDoctor = await Doctor.findById(oldDoctorId)
+            oldDoctor.appointments = oldDoctor.appointments.filter(id => id.toString() !== foundAppoint._id.toString())
+            await oldDoctor.save()
+            const newDoctor = await Doctor.findById(newDoctorId)
+            newDoctor.appointments.push(foundAppoint._id)
+            await newDoctor.save()
+        }
         res.redirect(`/appointments/${req.params.id}`)
     } catch (error) {
         console.log(error)
