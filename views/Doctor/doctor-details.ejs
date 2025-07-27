@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Doctor Details</h1>
+
+    <h3>Name: <%= foundDoctor.name %>
+    </h3>
+    <h4>Specialty: <%= foundDoctor.specialty %>
+    </h4>
+    <h4>Years of Experience: <%= foundDoctor.yearsOfExperience %>
+    </h4>
+    <h4>Appointments</h4>
+    <table>
+
+        <% if (foundDoctor.appointments.length> 0) { %>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Patient Name</th>
+                    <th>Reason</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% foundDoctor.appointments.forEach(appoint=> { %>
+                    <tr>
+                        <td>
+                            <%= new Date(appoint.date).toLocaleDateString() %>
+                        </td>
+                        <td>
+                            <%= appoint.patientName %>
+                        </td>
+                        <td>
+                            <%= appoint.reason %>
+                        </td>
+                        <td>
+                            <a href="/appointments/<%= appoint._id %>">More Details</a>
+                        </td>
+                    </tr>
+                    <% })} else {%>
+                            <tr colspan="4">
+                                <td>No appointments found for this doctor.</td>
+                            </tr>
+                    <% } %>
+            </tbody>
+    </table>
+</body>
+
+</html>

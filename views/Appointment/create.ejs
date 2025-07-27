@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Create Appointment</h1>
+    <form action="/appointments" method="post">
+        <label for="patientName">Patient Name:
+        </label>
+        <input type="text" name="patientName" id="patientName">
+        <br><br>
+        <label for="reason">Reason</label>
+        <input type="text" name="reason" id="reason">
+        <br><br>
+        <label for="date">Date of Appointment</label>
+        <input type="date" name="date" id="date">
+        <br><br>
+        <label for="doctor">Doctor</label>
+        <select name="doctor" id="doctor">
+            <% allDoctors.forEach(doctor => {%>
+                <option value="<%= doctor._id %>"><%= doctor.name %></option>
+            <%})%>
+        </select>
+        <br><br>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

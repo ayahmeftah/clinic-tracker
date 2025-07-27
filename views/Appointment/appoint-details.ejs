@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Appointment Details</h1>
+    <form action="/appointments/<%= foundAppoint._id %>?_method=delete" method="post">
+        <button>Delete Appointment</button>
+    </form> <br>
+    <form action="/appointments/<%= foundAppoint._id %>/edit" method="get">
+        <button>Edit Appointment</button>
+    </form>
+    <h2>Patient Name: <%= foundAppoint.patientName %>
+    </h2>
+    <p>Appointment Date: <%= new Date(foundAppoint.date).toLocaleDateString() %>
+    </p>
+    <p>Reason: <%= foundAppoint.reason %>
+    </p>
+    <p>Doctor: <%= foundAppoint.doctor.name %>
+    </p>
+
+    <h3>Notes</h3>
+    <form action="/appointments/<%= foundAppoint._id %>/notes" method="post">
+        <input type="text" name="content" id="content">
+        <button>Add Note</button>
+    </form>
+
+    <ul>
+        <% foundAppoint.notes.forEach(note => {%>
+            <li><%= note.content %></li>
+            <p>created at: <%= new Date(note.createdAt).toLocaleDateString() %></p>
+            <form action="/appointments/<%= foundAppoint._id %>/notes/delete" method="post">
+                <input type="hidden" name="noteId" value="<%= note._id %>">
+                <button>Delete Note</button>
+            </form>
+            <hr>
+
+       <% }) %>
+    </ul>
+
+
+</body>
+
+</html>

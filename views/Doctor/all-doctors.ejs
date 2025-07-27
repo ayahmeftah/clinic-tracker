@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>All Doctors</h1>
+
+    <% allDoctors.forEach(doctor => { %>
+
+        <h2><%= doctor.name %></h2>
+        <p>Specialty: <%= doctor.specialty %></p>
+        <p>Experience: <%= doctor.yearsOfExperience %></p>
+        <a href="/doctors/<%= doctor._id %>">View Details</a>
+    <% }) %>
+</body>
+</html>

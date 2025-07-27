@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+    <h1>All Appointments</h1>
+    <% allAppoint.forEach(appoint => { %>
+
+        <h2>Patient Name: <%= appoint.patientName %></h2>
+        <p>Date: <%= new Date(appoint.date).toLocaleDateString() %></p>
+        <p>Reason: <%= appoint.reason %></p>
+        <p>Doctor: <%= appoint.doctor.name %></p>
+        <a href="/appointments/<%= appoint._id %>">View Details</a>
+        <hr>
+    <% }) %>
+</body>
+</html>
